@@ -1,5 +1,4 @@
 from django.db import models
-#from helpers.models import TrackingModel
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.auth.models import (PermissionsMixin, UserManager, AbstractBaseUser)
 from django.utils.translation import gettext_lazy as _
@@ -39,9 +38,9 @@ class MyUserManager(UserManager):
         extra_fields.setdefault('is_superuser', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+            raise ValueError('O superusuário deve ter is_staff=True')
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError('O superusuário deve ter is_superuser=True')
 
         return self._create_user(username, email, password, **extra_fields)
 
@@ -70,14 +69,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('staff status'),
         default=False,
         help_text=_(
-            'Designates whether the user can log into this admin site.'),
+            'Designa se o usuário pode fazer login neste site de administração.'),
     )
     is_active = models.BooleanField(
         _('active'),
         default=True,
         help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
+            'Designa se este usuário deve ser tratado como ativo.'
+            'Desmarque isso em vez de excluir contas.'
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
@@ -85,7 +84,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('email_verified'),
         default=False,
         help_text=_(
-            'Designates whether this users email is verified. '
+            'Designa se o e-mail deste usuário é verificado. '
 
         ),
     )
